@@ -315,7 +315,7 @@ void loop()
     }
 
     
-    if (progress >= 2) {
+    if (progress >= 2) { // changed from 100 for dev
       tft.fillScreen(TFT_BLUE);
       tft.setTextSize(3);
       tft.setTextColor(TFT_WHITE, TFT_BLUE);
