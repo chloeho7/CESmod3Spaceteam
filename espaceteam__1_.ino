@@ -322,7 +322,7 @@ void loop()
       tft.drawString("COMS", 20, 80, 2);
       tft.drawString("3930!", 18, 130, 2);
       delay(6000);
-      if (expireLength > 5){ 
+      if (expireLength > 5){ // decrease expireLength each round
         expireLength -= 2;
       }
       progress = 0;
