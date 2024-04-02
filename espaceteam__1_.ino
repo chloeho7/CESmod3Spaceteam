@@ -309,6 +309,7 @@ void loop()
         if (progress == shake){ // can be variable for the level
           while (shakecount > 0){
             ShakeCommand();
+            broadcast("A: SHAKE");
           }
         }
     }
