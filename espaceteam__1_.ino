@@ -33,6 +33,8 @@ int lastRedrawTime = 0;
 int shake = 0;
 int shakecount = 5;
 
+int level = 1;
+
 //we could also use xSemaphoreGiveFromISR and its associated fxns, but this is fine
 volatile bool scheduleCmdAsk = true;
 hw_timer_t * askRequestTimer = NULL;
@@ -304,31 +306,36 @@ void loop()
     tft.drawString(cmdRecvd.substring(0, cmdRecvd.indexOf(' ')), 0, 0, 2);
     tft.drawString(cmdRecvd.substring(cmdRecvd.indexOf(' ')+1), 0, 0+lineHeight, 2);
     redrawCmdRecvd = false;
-
-    if (expireLength < 25) {
-        if (progress == shake){ // can be variable for the level
-          while (shakecount > 0){
-            ShakeCommand();
-            broadcast("A: SHAKE");
-          }
-        }
-    }
+//
+//    if (expireLength < 25) {
+  //      if (progress == shake){ // can be variable for the level
+    //      while (shakecount > 0){
+      //      ShakeCommand();
+        //    broadcast("A: SHAKE");
+ //         }
+//        }
+ //   }
 
     
-    if (progress >= 2) { // changed from 100 for dev
+    if (progress >= 100) { 
       tft.fillScreen(TFT_BLUE);
       tft.setTextSize(3);
       tft.setTextColor(TFT_WHITE, TFT_BLUE);
-      tft.drawString("GO", 45, 20, 2);
-      tft.drawString("COMS", 20, 80, 2);
-      tft.drawString("3930!", 18, 130, 2);
       delay(6000);
-      if (expireLength > 5){ // decrease expireLength each round
-        expireLength -= 2;
+      level += 1;
+      if (expireLength > 5){ 
+          expireLength -= 2;
+          tft.drawString("LEVEL", 45, 20, 2);
+          tft.drawString(String(level), 20, 80, 2);
+      } else {
+        tft.drawString("YOU WON", 45, 20, 2);
+        tft.drawString("CONGRATS", 20, 80, 2);
+        tft.drawString("3930!", 18, 130, 2);
+        level = 0;
       }
       progress = 0;
-     // setup();
-      ESP.restart();
+      setup();
+     // ESP.restart();
 
     } else {
       tft.fillRect(15, lineHeight*2+5, 100, 6, TFT_GREEN);
