@@ -1,5 +1,5 @@
 # CESmod3Spaceteam
-Team: Chloe, Julia, Annika, Orli, Canyon, Raven
+Team: Chloe, Julia, Annika, Orli, Canyon, Raven, Aparna
 
 ## Module 3 Overview
 The goal of this Module was to give us experience with building and modifying distributed systems through an ESP32 Space Team game. We had to add new functionality to the existing ESP32 Space Team code in 
